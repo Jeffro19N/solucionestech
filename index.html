@@ -3,480 +3,206 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Servicios de Ingeniería en Computación - Ing. Jefferson Narváez</title>
+    <title>Servicios de Ingeniería en Computación — Ing. Jefferson Narváez</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Poppins', 'Segoe UI', sans-serif;
+        :root{
+            --bg-1:#0d1b2a;
+            --accent-1:#ff6b35;
+            --accent-2:#0066cc;
+            --card:#ffffff;
+            --muted:#6c757d;
+            --glass: rgba(255,255,255,0.06);
+            --radius:14px;
+            --max-width:1100px;
+            --format-width:1100px;
+            --format-height:600px;
         }
-        
-        body {
-            background: linear-gradient(135deg, #1a2a6c, #2c3e50, #4ca1af);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            padding: 20px;
-            flex-direction: column;
+        *{box-sizing:border-box}
+        html,body{height:100%;margin:0;font-family:'Poppins',system-ui,-apple-system,"Segoe UI",Roboto,Arial;}
+        body{
+            background: linear-gradient(135deg,#0d1b2a 0%, #1a2e4a 40%, #1e3a54 100%);
+            display:flex;align-items:flex-start;justify-content:center;padding:8px;
+            color: #0d1b2a;
+            min-height:100vh;
         }
-        
-        .controls {
-            margin-bottom: 20px;
-            display: flex;
-            gap: 15px;
+        .page-wrap{width:100%;max-width:var(--max-width);background:linear-gradient(180deg,#ffffff 0%, #fbfbfd 100%);border-radius:18px;box-shadow:0 30px 60px rgba(13,27,42,0.45);overflow:hidden}
+        .page-wrap.social-format{max-width:var(--format-width);aspect-ratio:auto}
+
+        /* Controls */
+        .controls{display:none}
+
+        /* Flyer */
+        .flyer{display:flex;flex-direction:column}
+        .hero{padding:16px;background:linear-gradient(90deg,var(--accent-2),#1a1a1a);color:white;display:flex;align-items:center;gap:12px}
+        .logo-wrapper{width:90px;height:90px;border-radius:50%;background:linear-gradient(135deg,#fff2,#ffffff20);display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 4px 15px rgba(0,0,0,0.18)}
+        .logo-inner{width:75px;height:75px;border-radius:50%;background:white;display:flex;align-items:center;justify-content:center;flex-direction:column}
+        .logo-inner i{font-size:22px;color:#2c3e50}
+        .hero-text{flex:1}
+        .hero h1{margin:0;font-size:18px;letter-spacing:0.3px}
+        .hero h2{margin:3px 0 0;font-size:12px;font-weight:500;opacity:.95}
+        .tagline{margin-top:4px;font-size:11px;font-style:italic;opacity:0.95;display:none}
+
+        /* Highlight */
+        .highlight{background:linear-gradient(90deg,rgba(106,17,203,0.08),rgba(76,161,175,0.06));padding:10px;text-align:center}
+        .highlight h3{margin:4px 0;font-size:13px;color:var(--accent-2)}
+
+        /* Main */
+        .main{display:flex;gap:12px;padding:12px}
+        .services{flex:2}
+        .sidebar{flex:1;background:var(--accent-2);color:white;padding:12px;border-radius:10px;align-self:flex-start}
+
+        .section-title{font-size:13px;color:var(--accent-2);margin:6px 0 8px;font-weight:700}
+        .services-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px}
+        .card{background:var(--card);padding:10px;border-radius:10px;box-shadow:0 4px 12px rgba(12,18,40,0.06);display:flex;flex-direction:column;align-items:center;text-align:center}
+        .service-icon{width:44px;height:44px;border-radius:8px;display:flex;align-items:center;justify-content:center;color:white;margin-bottom:6px;font-size:16px}
+        .service-title{font-weight:700;margin:3px 0;font-size:12px}
+        .service-desc{color:var(--muted);font-size:10px;line-height:1.3}
+
+        /* Sidebar */
+        .contact-title{font-size:14px;margin:0 0 6px;color:#fff}
+        .phone{background:var(--glass);padding:8px;border-radius:8px;margin:6px 0;font-weight:700;display:flex;align-items:center;gap:6px;justify-content:center;font-size:12px}
+        .whatsapp{display:inline-block;background:#25D366;color:#06201a;padding:8px 14px;border-radius:999px;text-decoration:none;font-weight:700;font-size:11px;box-shadow:0 4px 12px rgba(37,211,102,0.14)}
+        .guarantee{margin-top:8px;background:rgba(255,255,255,0.06);padding:8px;border-radius:8px;font-size:10px}
+
+        /* Footer */
+        .footer{background:#081026;color:#9fb4c4;padding:6px;text-align:center;font-size:10px}
+
+        /* Upload */
+        .logo-upload{display:none}
+
+        @media (max-width:900px){
+            .main{flex-direction:column}
+            .sidebar{order:2}
+            .services{order:1}
+            .hero{flex-direction:column;align-items:flex-start;gap:10px}
+            .services-grid{grid-template-columns:repeat(auto-fill,minmax(120px,1fr))}
         }
-        
-        .btn {
-            padding: 12px 25px;
-            background: #2c3e50;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-weight: bold;
-            transition: all 0.3s ease;
-        }
-        
-        .btn:hover {
-            background: #4ca1af;
-            transform: translateY(-2px);
-        }
-        
-        .flyer-container {
-            width: 100%;
-            max-width: 1100px;
-            background: white;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
-            display: flex;
-            flex-direction: column;
-        }
-        
-        .header {
-            background: linear-gradient(to right, #2c3e50, #4ca1af);
-            color: white;
-            padding: 30px;
-            text-align: center;
-            position: relative;
-        }
-        
-        .logo-container {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 20px;
-        }
-        
-        .logo {
-            width: 120px;
-            height: 120px;
-            background: white;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-        }
-        
-        .logo-icon {
-            font-size: 50px;
-            background: linear-gradient(to right, #4ca1af, #2c3e50);
-            -webkit-background-clip: text; 
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        
-        .header h1 {
-            font-size: 2.8rem;
-            margin-bottom: 10px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-        }
-        
-        .header h2 {
-            font-size: 1.6rem;
-            font-weight: 400;
-            margin-bottom: 15px;
-        }
-        
-        .tagline {
-            font-style: italic;
-            font-size: 1.1rem;
-            margin-top: 10px;
-        }
-        
-        .main-content {
-            display: flex;
-            flex-wrap: wrap;
-        }
-        
-        .services-section {
-            flex: 3;
-            padding: 30px;
-            background: #f8f9fa;
-        }
-        
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
-            margin-top: 20px;
-        }
-        
-        .service-card {
-            background: white;
-            border-radius: 10px;
-            padding: 20px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-        }
-        
-        .service-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
-        }
-        
-        .service-icon {
-            color: white;
-            width: 70px;
-            height: 70px;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-bottom: 15px;
-            font-size: 1.8rem;
-        }
-        
-        .dev-icon {
-            background: linear-gradient(to right, #6a11cb, #2575fc);
-        }
-        
-        .it-icon {
-            background: linear-gradient(to right, #4ca1af, #2c3e50);
-        }
-        
-        .course-icon {
-            background: linear-gradient(to right, #FF512F, #DD2476);
-        }
-        
-        .service-title {
-            font-size: 1.2rem;
-            color: #2c3e50;
-            margin-bottom: 10px;
-            font-weight: 600;
-        }
-        
-        .service-description {
-            color: #6c757d;
-            font-size: 0.95rem;
-        }
-        
-        .sidebar {
-            flex: 1;
-            background: #2c3e50;
-            color: white;
-            padding: 30px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-        
-        .contact-info {
-            text-align: center;
-        }
-        
-        .contact-title {
-            font-size: 1.8rem;
-            margin-bottom: 25px;
-            color: #4ca1af;
-        }
-        
-        .phone-number {
-            font-size: 1.5rem;
-            margin: 20px 0;
-            background: rgba(255, 255, 255, 0.1);
-            padding: 15px;
-            border-radius: 8px;
-            font-weight: bold;
-        }
-        
-        .whatsapp-btn {
-            display: inline-block;
-            background: #25D366;
-            color: white;
-            padding: 15px 30px;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: bold;
-            margin-top: 20px;
-            transition: all 0.3s ease;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-        }
-        
-        .whatsapp-btn:hover {
-            background: #128C7E;
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
-        }
-        
-        .guarantee {
-            text-align: center;
-            margin-top: 25px;
-            padding: 15px;
-            background: rgba(255, 255, 255, 0.08);
-            border-radius: 8px;
-            font-style: italic;
-        }
-        
-        .footer {
-            background: #1a2a6c;
-            color: white;
-            text-align: center;
-            padding: 20px;
-            font-size: 0.9rem;
-        }
-        
-        .highlight {
-            background: linear-gradient(to right, #6a11cb, #2575fc);
-            color: white;
-            padding: 25px;
-            text-align: center;
-        }
-        
-        .highlight-content {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        
-        .logo-ideas {
-            margin-top: 40px;
-            background: white;
-            padding: 25px;
-            border-radius: 15px;
-            max-width: 1100px;
-            width: 100%;
-        }
-        
-        .logo-ideas h2 {
-            color: #2c3e50;
-            text-align: center;
-            margin-bottom: 25px;
-            border-bottom: 2px solid #4ca1af;
-            padding-bottom: 10px;
-        }
-        
-        .logo-samples {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            margin-top: 20px;
-        }
-        
-        .logo-sample {
-            background: #f8f9fa;
-            padding: 20px;
-            border-radius: 10px;
-            text-align: center;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
-        }
-        
-        .logo-shape {
-            width: 100px;
-            height: 100px;
-            margin: 0 auto 15px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 40px;
-            color: white;
-            border-radius: 15px;
-        }
-        
-        @media (max-width: 768px) {
-            .main-content {
-                flex-direction: column;
-            }
-            
-            .header h1 {
-                font-size: 2.2rem;
-            }
-            
-            .header h2 {
-                font-size: 1.3rem;
-            }
-            
-            .phone-number {
-                font-size: 1.2rem;
-            }
-            
-            .controls {
-                flex-direction: column;
-            }
+        @media print{
+            .controls{display:none}
+            body{background:#fff}
+            .page-wrap{box-shadow:none}
         }
     </style>
 </head>
 <body>
-    <div class="controls">
-        <button class="btn" onclick="downloadImage()">Descargar como Imagen</button>
-        <button class="btn" onclick="window.print()">Imprimir Aviso</button>
-    </div>
+    <div class="page-wrap" id="flyer">
+        <div class="flyer">
+            <div class="hero">
+                <div class="logo-wrapper">
+                    <div class="logo-inner">
+                        <i class="fas fa-laptop-code"></i>
+                    </div>
+                </div>
+                <div class="hero-text">
+                    <h1>Ing. Jefferson Narváez</h1>
+                    <h2>Servicios Profesionales de Ingeniería en Computación / Desarrollo de Software</h2>
+                    <div class="tagline">Soluciones tecnológicas integrales para aumentar tu productividad</div>
+                </div>
+            </div>
 
-    <div class="flyer-container" id="flyer">
-        <div class="header">
-            <div class="logo-container">
-                <div class="logo">
-                    <i class="fas fa-laptop-code logo-icon"></i>
+            <div class="highlight">
+                <div style="max-width:900px;margin:0 auto;">
+                    <p style="margin:8px 0 0;color:var(--muted)">Aplicaciones web y de escritorio diseñadas específicamente para las necesidades de tu negocio.</p>
                 </div>
             </div>
-            <h1>Ing. Jefferson Narváez</h1>
-            <h2>Servicios Profesionales de Ingeniería en Computación</h2>
-            <p class="tagline">Soluciones tecnológicas integrales para aumentar tu productividad</p>
-        </div>
-        
-        <div class="highlight">
-            <div class="highlight-content">
-                <h2><i class="fas fa-star"></i> NUEVO SERVICIO <i class="fas fa-star"></i></h2>
-                <h3>Desarrollo de Software a Medida</h3>
-                <p>Aplicaciones web y de escritorio diseñadas específicamente para las necesidades de tu negocio</p>
+
+            <div class="main">
+                <div class="services">
+                    <div style="display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap">
+                        <h2 style="margin:0;color:var(--accent-2)">Servicios Especializados</h2>
+                        <div style="color:var(--muted);font-size:14px">Soluciones completas para particulares y empresas</div>
+                    </div>
+
+                    <div style="margin-top:18px">
+                        <div class="section-title">Desarrollo de Software</div>
+                        <div class="services-grid">
+                            <div class="card">
+                                <div class="service-icon" style="background:linear-gradient(135deg,#0066cc,#00a8e8)"><i class="fas fa-code"></i></div>
+                                <div class="service-title">Desarrollo Web</div>
+                                <div class="service-desc">Páginas responsivas, apps web y tiendas en línea personalizadas.</div>
+                            </div>
+                            <div class="card">
+                                <div class="service-icon" style="background:linear-gradient(135deg,#2c3e50,#34495e)"><i class="fas fa-desktop"></i></div>
+                                <div class="service-title">Software a Medida</div>
+                                <div class="service-desc">Aplicaciones de escritorio adaptadas a procesos empresariales.</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="margin-top:18px">
+                        <div class="section-title">Soporte Técnico</div>
+                        <div class="services-grid">
+                            <div class="card">
+                                <div class="service-icon" style="background:linear-gradient(135deg,#1a472a,#2ecc71)"><i class="fas fa-tools"></i></div>
+                                <div class="service-title">Mantenimiento Preventivo</div>
+                                <div class="service-desc">Mantenimiento regular para evitar fallos y alargar vida útil.</div>
+                            </div>
+                            <div class="card">
+                                <div class="service-icon" style="background:linear-gradient(135deg,#0066cc,#005ca8)"><i class="fas fa-redo-alt"></i></div>
+                                <div class="service-title">Formateo de Computadores</div>
+                                <div class="service-desc">Formateo e instalación optimizada del sistema.</div>
+                            </div>
+                            <div class="card">
+                                <div class="service-icon" style="background:linear-gradient(135deg,#34495e,#2c3e50)"><i class="fas fa-download"></i></div>
+                                <div class="service-title">Instalación de Software</div>
+                                <div class="service-desc">Instalación y configuración de aplicaciones necesarias.</div>
+                            </div>
+                            <div class="card">
+                                <div class="service-icon" style="background:linear-gradient(135deg,#1a472a,#27ae60)"><i class="fas fa-key"></i></div>
+                                <div class="service-title">Activación de Licencias</div>
+                                <div class="service-desc">Activación de Windows y Microsoft Office.</div>
+                            </div>
+                            <div class="card">
+                                <div class="service-icon" style="background:linear-gradient(135deg,#0066cc,#00a8e8)"><i class="fas fa-microchip"></i></div>
+                                <div class="service-title">Actualización de Hardware</div>
+                                <div class="service-desc">Mejora el rendimiento con componentes de calidad.</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="margin-top:18px">
+                        <div class="section-title">Capacitación</div>
+                        <div class="services-grid">
+                            <div class="card">
+                                <div class="service-icon" style="background:linear-gradient(135deg,#455a64,#37474f)"><i class="fas fa-chalkboard-teacher"></i></div>
+                                <div class="service-title">Cursos de Ofimática</div>
+                                <div class="service-desc">Capacitación personalizada para aumentar la eficiencia laboral.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <aside class="sidebar">
+                    <div style="text-align:center">
+                        <h3 class="contact-title">¡Contáctame ahora!</h3>
+                        <p style="margin:0;color:rgba(255,255,255,0.92)">Consultas, cotizaciones o asesoría técnica gratuita</p>
+
+                        <div class="phone" style="margin-top:14px"><i class="fas fa-phone"></i> 093 924 3717</div>
+
+                        <div class="phone"><i class="fas fa-envelope"></i> <a href="mailto:narvaezivan10@gmail.com" style="color:white;text-decoration:none">narvaezivan10@gmail.com</a></div>
+
+                        <a class="whatsapp" href="https://wa.me/593939243717" target="_blank"><i class="fab fa-whatsapp"></i> Contactar por WhatsApp</a>
+
+                        <div class="guarantee">
+                            <p style="margin:6px 0"><i class="fas fa-shield-alt"></i> Servicio garantizado</p>
+                            <p style="margin:6px 0"><i class="fas fa-clock"></i> Respuesta inmediata</p>
+                            <p style="margin:6px 0"><i class="fas fa-dollar-sign"></i> Precios competitivos</p>
+                        </div>
+                    </div>
+                </aside>
             </div>
-        </div>
-        
-        <div class="main-content">
-            <div class="services-section">
-                <h2 style="color: #2c3e50; text-align: center; margin-bottom: 10px;">Servicios Especializados</h2>
-                <p style="text-align: center; color: #6c757d; margin-bottom: 20px;">Ofrezco soluciones tecnológicas completas y profesionales para particulares y empresas</p>
-                
-                <h3 style="color: #6a11cb; margin: 25px 0 15px; text-align: center; border-bottom: 2px solid #6a11cb; padding-bottom: 8px;">
-                    <i class="fas fa-laptop-code"></i> Desarrollo de Software
-                </h3>
-                <div class="services-grid">
-                    <div class="service-card">
-                        <div class="service-icon dev-icon">
-                            <i class="fas fa-code"></i>
-                        </div>
-                        <h3 class="service-title">Desarrollo Web</h3>
-                        <p class="service-description">Páginas web responsivas, aplicaciones web y tiendas en línea personalizadas.</p>
-                    </div>
-                    
-                    <div class="service-card">
-                        <div class="service-icon dev-icon">
-                            <i class="fas fa-desktop"></i>
-                        </div>
-                        <h3 class="service-title">Software a Medida</h3>
-                        <p class="service-description">Aplicaciones de escritorio desarrolladas específicamente para tus necesidades empresariales.</p>
-                    </div>
-                    
-                </div>
-                
-                <h3 style="color: #4ca1af; margin: 25px 0 15px; text-align: center; border-bottom: 2px solid #4ca1af; padding-bottom: 8px;">
-                    <i class="fas fa-tools"></i> Soporte Técnico
-                </h3>
-                <div class="services-grid">
-                    <div class="service-card">
-                        <div class="service-icon it-icon">
-                            <i class="fas fa-tools"></i>
-                        </div>
-                        <h3 class="service-title">Mantenimiento Preventivo</h3>
-                        <p class="service-description">Alarga la vida útil de tus equipos y previene fallos con mantenimiento profesional regular.</p>
-                    </div>
-                    
-                    <div class="service-card">
-                        <div class="service-icon it-icon">
-                            <i class="fas fa-redo-alt"></i>
-                        </div>
-                        <h3 class="service-title">Formateo de Computadores</h3>
-                        <p class="service-description">Deja tu equipo como nuevo con formateo completo e instalación optimizada del sistema.</p>
-                    </div>
-                    
-                    <div class="service-card">
-                        <div class="service-icon it-icon">
-                            <i class="fas fa-download"></i>
-                        </div>
-                        <h3 class="service-title">Instalación de Software</h3>
-                        <p class="service-description">Instalación y configuración de todas las aplicaciones que necesites para tu trabajo.</p>
-                    </div>
-                    
-                    <div class="service-card">
-                        <div class="service-icon it-icon">
-                            <i class="fas fa-key"></i>
-                        </div>
-                        <h3 class="service-title">Activación de Licencias</h3>
-                        <p class="service-description">Activación de Windows y Microsoft Office.</p>
-                    </div>
-                    
-                    <div class="service-card">
-                        <div class="service-icon it-icon">
-                            <i class="fas fa-microchip"></i>
-                        </div>
-                        <h3 class="service-title">Actualización de Hardware</h3>
-                        <p class="service-description">Mejora el rendimiento de tu equipo con componentes modernos y de calidad.</p>
-                    </div>
-                </div>
-                
-                <h3 style="color: #FF512F; margin: 25px 0 15px; text-align: center; border-bottom: 2px solid #FF512F; padding-bottom: 8px;">
-                    <i class="fas fa-graduation-cap"></i> Capacitación
-                </h3>
-                <div class="services-grid">
-                    <div class="service-card">
-                        <div class="service-icon course-icon">
-                            <i class="fas fa-chalkboard-teacher"></i>
-                        </div>
-                        <h3 class="service-title">Cursos de Ofimática</h3>
-                        <p class="service-description">Capacitación personalizada para aumentar la eficiencia y productividad en entornos laborales.</p>
-                    </div>
-                
-                </div>
+
+            <div class="footer">
+                <div>Ing. Jefferson Narváez • Servicios Profesionales de Ingeniería en Computación</div>
+                <div style="margin-top:6px">© 2025 - Todos los derechos reservados</div>
             </div>
-            
-            <div class="sidebar">
-                <div class="contact-info">
-                    <h2 class="contact-title">¡Contáctame ahora!</h2>
-                    <p>Para consultas, cotizaciones o asesoría técnica gratuita</p>
-                    
-                    <div class="phone-number">
-                        <i class="fas fa-phone"></i> 093 924 3717
-                    </div>
-                    
-                    <p>Servicio rápido, profesional y garantizado</p>
-                    
-                    <a href="https://wa.me/593939243717" class="whatsapp-btn">
-                        <i class="fab fa-whatsapp"></i> Contactar por WhatsApp
-                    </a>
-                    
-                    <div class="guarantee">
-                        <p><i class="fas fa-shield-alt"></i> Servicio garantizado</p>
-                        <p><i class="fas fa-clock"></i> Respuesta inmediata</p>
-                        <p><i class="fas fa-dollar-sign"></i> Precios competitivos</p>
-                        <p><i class="fas fa-certificate"></i> Profesional certificado</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <div class="footer">
-            <p>Ing. Jefferson Narváez • Servicios Profesionales de Ingeniería en Computación</p>
-            <p>© 2025 - Todos los derechos reservados</p>
         </div>
     </div>
-
 
     <script>
-        function downloadImage() {
-            html2canvas(document.getElementById('flyer')).then(function(canvas) {
-                var link = document.createElement('a');
-                link.download = 'servicios-ingenieria-computacion.png';
-                link.href = canvas.toDataURL('image/png');
-                link.click();
-            });
-        }
+        // Página de servicios oficial - sin funcionalidades de descarga
     </script>
 </body>
 </html>
